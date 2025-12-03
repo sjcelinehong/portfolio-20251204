@@ -1,38 +1,63 @@
-.App {
-  text-align: center;
+/* src/App.css */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden; /* App.js에서 라우팅되는 컴포넌트들이 전체화면을 차지하므로 */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* 데스크탑 배경 이미지 */
+.desktop-scene {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('https://source.unsplash.com/random/1920x1080/?office-desk,minimalist'); /* 랜덤 오피스 배경 */
+  background-size: cover;
+  background-position: center;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: flex-end; /* 책상을 아래쪽에 배치 */
 }
 
-.App-link {
-  color: #61dafb;
+.desk {
+  width: 90%;
+  height: 50vh; /* 책상 높이 */
+  background-color: #5a4b43; /* 어두운 나무 책상 */
+  position: absolute;
+  bottom: 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.4);
+  z-index: 5;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* 종이들 */
+.paper {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 6;
 }
+
+.paper-left {
+  width: 120px;
+  height: 180px;
+  bottom: 10vh;
+  left: 15vw;
+  transform: rotate(-5deg);
+}
+
+.paper-right {
+  width: 100px;
+  height: 150px;
+  bottom: 15vh;
+  right: 18vw;
+  transform: rotate(10deg);
+}
+
+/* 모니터 컨테이너는 Desktop.js의 styled-components로 대체 */
+
+/* ContentPage 관련 스타일은 해당 컴포넌트의 styled-components로 대체 */
+
+/* FolderExplorer 관련 스타일은 해당 컴포넌트의 styled-components로 대체 */
