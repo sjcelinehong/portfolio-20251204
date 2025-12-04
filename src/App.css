@@ -1,63 +1,135 @@
-/* src/App.css */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow: hidden; /* App.js에서 라우팅되는 컴포넌트들이 전체화면을 차지하므로 */
+/* src/App.css (Append to existing file) */
+
+/* --- Monitor / Screen Styles --- */
+.monitor-container {
+  position: absolute;
+  /* Initial state: small monitor on the desk */
+  width: 400px;
+  height: 250px;
+  bottom: 25vh; /* adjust based on desk height */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000;
+  border: 10px solid #333;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 100;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
-/* 데스크탑 배경 이미지 */
-.desktop-scene {
-  position: relative;
+/* State when the monitor is expanded */
+.monitor-container.expanded {
   width: 100vw;
   height: 100vh;
-  background-image: url('https://source.unsplash.com/random/1920x1080/?office-desk,minimalist'); /* 랜덤 오피스 배경 */
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end; /* 책상을 아래쪽에 배치 */
-}
-
-.desk {
-  width: 90%;
-  height: 50vh; /* 책상 높이 */
-  background-color: #5a4b43; /* 어두운 나무 책상 */
-  position: absolute;
   bottom: 0;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.4);
-  z-index: 5;
+  left: 50%;
+  border-width: 0;
+  border-radius: 0;
+  z-index: 1000; /* On top of everything */
 }
 
-/* 종이들 */
-.paper {
+.monitor-screen {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1e1e2f 0%, #2d2b42 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hint text when not expanded */
+.monitor-hint {
+  color: white;
   position: absolute;
-  background-color: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 6;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.monitor-container.expanded .monitor-hint {
+  opacity: 0;
 }
 
-.paper-left {
-  width: 120px;
-  height: 180px;
-  bottom: 10vh;
-  left: 15vw;
-  transform: rotate(-5deg);
+/* --- Folder Component Styles (Converted from Tailwind) --- */
+.folder-wrapper {
+  position: absolute;
+  transition: transform 0.3s ease;
 }
 
-.paper-right {
+.folder-group {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+.folder-group:hover {
+  transform: translateY(-8px);
+}
+.folder-group.open {
+  transform: translateY(-8px);
+}
+
+.folder-back {
+  position: relative;
   width: 100px;
-  height: 150px;
-  bottom: 15vh;
-  right: 18vw;
-  transform: rotate(10deg);
+  height: 80px;
+  border-radius: 0 10px 10px 10px;
 }
 
-/* 모니터 컨테이너는 Desktop.js의 styled-components로 대체 */
+.folder-tab {
+  position: absolute;
+  bottom: 98%;
+  left: 0;
+  width: 30px;
+  height: 10px;
+  border-radius: 5px 5px 0 0;
+}
 
-/* ContentPage 관련 스타일은 해당 컴포넌트의 styled-components로 대체 */
+.folder-paper {
+  position: absolute;
+  z-index: 20;
+  bottom: 10%;
+  left: 50%;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-50%) translateY(10%);
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
 
-/* FolderExplorer 관련 스타일은 해당 컴포넌트의 styled-components로 대체 */
+.folder-group:hover .folder-paper:not(.open) {
+  transform: translateX(-50%) translateY(0);
+}
+.folder-paper.open:hover {
+  transform: scale(1.1);
+}
+
+/* Front flaps skew effect */
+.folder-flap {
+  position: absolute;
+  z-index: 30;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  transform-origin: bottom;
+  border-radius: 5px 10px 10px 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Closed state hover effect */
+.folder-group:hover .flap-left:not(.open) {
+  transform: skew(15deg) scaleY(0.6);
+}
+.folder-group:hover .flap-right:not(.open) {
+  transform: skew(-15deg) scaleY(0.6);
+}
+
+/* Open state fixed skew */
+.flap-left.open {
+  transform: skew(15deg) scaleY(0.6);
+}
+.flap-right.open {
+  transform: skew(-15deg) scaleY(0.6);
+}
