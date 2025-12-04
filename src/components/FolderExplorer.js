@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 // 새로 제공받은 Folder 컴포넌트 import
-import Folder from './Folder'; 
+import Folder from './Overlay'; 
 import './Folder.css'; // Folder 컴포넌트의 필수 CSS 파일 import
 
 // (Styled Components 정의는 이전과 동일)

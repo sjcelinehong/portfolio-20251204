@@ -1,7 +1,7 @@
 // Experience.jsx
 import React, { useRef, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useStore } from './store';
+import { useStore } from './modules/store';
 import * as THREE from 'three';
 import { easing } from 'maath'; // @react-three/drei에 포함된 유틸
 
