@@ -1,6 +1,6 @@
 // Overlay.jsx
 import React, { useRef } from 'react';
-import { useStore } from './store';
+import { useStore } from './modules/store';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // --- Components ---
@@ -142,7 +142,7 @@ const CenterScreenContent = () => {
                 <div className="w-full min-h-screen bg-slate-900 text-white p-20" id="project">
                     <h3 className="text-4xl mb-10">Live Project</h3>
                     <div className="p-10 border border-white/20 rounded-xl text-center">
-                        <a href="#" className="text-2xl text-blue-400 hover:underline">Launch Live Demo -></a>
+                        <a href="#" className="text-2xl text-blue-400 hover:underline">Launch Live Demo </a>
                     </div>
                 </div>
 
